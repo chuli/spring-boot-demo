@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD SQL Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kk.domain.mapper.UserMapper">
+    <resultMap id="user" type="com.kk.domain.entity.User"/>
+    <parameterMap id="user" type="com.kk.domain.entity.User"/>
+    <select id="findUserByUserName" parameterType="String" resultMap="user">
+        SELECT * FROM user WHERE user_name = #{1}
+    </select>
+
+    <update id="updateUserByUserName" parameterMap="user">
+        UPDATE user SET user_password = #{userPassword} WHERE user_name = #{userName}
+    </update>
+
+    <delete id="deleteUserByUserName" parameterType="String">
+        DELETE FROM user WHERE user_name = #{1}
+    </delete>
+
+    <!-- 使用alias自定义的parameterType -->
+    <insert id="saveUser" parameterMap="user">
+        INSERT INTO user (user_password, user_name) VALUES (#{userPassword}, #{userName})
+    </insert>
+
+    <select id="getUserList" resultMap="user">
+        SELECT * FROM user
+    </select>
+</mapper>

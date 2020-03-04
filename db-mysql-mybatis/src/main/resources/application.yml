@@ -1,0 +1,46 @@
+server:
+  port: 8071
+
+
+spring:
+  datasource:
+    # 数据库驱动
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    # 数据库地址
+    url: 'jdbc:mysql://localhost:3306/test?zeroDateTimeBehavior=convertToNull&useUnicode=true&characterEncoding=utf-8
+    &serverTimezone=Asia/Shanghai&useSSL=false'
+    username: root
+    password: root
+    druid:
+      # 初始化大小、最小或最大
+      initial-size: 5
+      min-idle: 5
+      max-active: 20
+      # 获取连接等待超时的时间，单位毫秒
+      max-wait: 60000
+      # 配置间隔多久进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+      time-between-eviction-runs-millis: 60000
+      # 配置一个连接在连接池中的最小生存时间，单位是毫秒
+      min-evictable-idle-time-millis: 300000
+      validation-query: SELECT 1
+      test-while-idle: true
+      test-on-borrow: false
+      test-on-return: false
+      # 打开PSCache，并且制定每个连接上PSCache的大小
+      pool-prepared-statements: true
+      max-pool-prepared-statement-per-connection-size: 20
+      # 配置监控统计拦截的filters，去掉后监控界面sql无法统计，wall用于防火墙
+      filters: stat,wall,log4j
+
+mybatis:
+  # MyBatis 配置是否开启
+  check-config-location: true
+  # MyBatis配置文件位置，与check-config-location配合使用
+  config-location: classpath:mybatis/mybatis-config.xml
+  # mapper 文件存放位置
+  mapper-locations: classpath*:mapper/*Mapper.xml
+
+logging:
+  level:
+    # 日志打印级别，可具体到包、类
+    com.kk.domain.mapper: debug

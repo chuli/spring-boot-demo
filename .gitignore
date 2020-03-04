@@ -1,3 +1,22 @@
+# Project Files #
+*.iml
+*.bak
+*.versionsBackup
+.classpath
+.project
+.settings
+hsf.configuration
+*.cache
+*.tmp
+*.orig
+*.rej
+.DS_Store
+LOG_FILE_IS_UNDEFINED*
+
+# Project Directories #
+.idea/
+target/
+logs/
 # Compiled class file
 *.class
 
