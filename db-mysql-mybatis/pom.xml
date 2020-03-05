@@ -11,6 +11,10 @@
 
     <artifactId>db-mysql-mybatis</artifactId>
 
+    <properties>
+        <mybatis-generator-maven-plugin-version>1.3.7</mybatis-generator-maven-plugin-version>
+    </properties>
+
 
     <dependencies>
         <dependency>
@@ -37,4 +41,47 @@
         </dependency>
     </dependencies>
 
+    <build>
+        <finalName>${artifactId}</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+
+            <plugin>
+                <groupId>org.mybatis.generator</groupId>
+                <artifactId>mybatis-generator-maven-plugin</artifactId>
+                <version>${mybatis-generator-maven-plugin-version}</version>
+                <configuration>
+                    <!-- MyBatis generator 配置文件位置 -->
+                    <configurationFile>src/main/resources/mybatis/GeneratorConfig.xml</configurationFile>
+                    <!-- 生成过程中是否输出详细信息 -->
+                    <verbose>true</verbose>
+                    <!-- 允许覆盖生成的Java文件，overwrite选项只能让java文件被覆盖，xml永远是merge追加，不可配置为overwrite -->
+                    <overwrite>true</overwrite>
+                </configuration>
+                <!-- 添加mysql-connector-java依赖后就不需要再mybatis配置文件中用classPathEntry手动指定驱动位置了 -->
+                <dependencies>
+                    <dependency>
+                        <groupId>org.mybatis.generator</groupId>
+                        <artifactId>mybatis-generator-core</artifactId>
+                        <version>1.3.7</version>
+                    </dependency>
+
+                    <dependency>
+                        <groupId>org.mybatis</groupId>
+                        <artifactId>mybatis</artifactId>
+                        <version>3.4.6</version>
+                    </dependency>
+
+                    <dependency>
+                        <groupId>mysql</groupId>
+                        <artifactId>mysql-connector-java</artifactId>
+                        <version>6.0.6</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+        </plugins>
+    </build>
 </project>
