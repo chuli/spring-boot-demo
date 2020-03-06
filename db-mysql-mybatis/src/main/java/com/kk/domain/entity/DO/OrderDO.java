@@ -17,6 +17,8 @@ public class OrderDO {
 
     private Date mtime;
 
+    private String content;
+
     public Long getId() {
         return id;
     }
@@ -71,5 +73,13 @@ public class OrderDO {
 
     public void setMtime(Date mtime) {
         this.mtime = mtime;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
     }
 }

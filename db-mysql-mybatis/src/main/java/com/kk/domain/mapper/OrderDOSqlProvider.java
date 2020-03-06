@@ -41,6 +41,34 @@ public class OrderDOSqlProvider {
             sql.VALUES("mtime", "#{mtime,jdbcType=TIMESTAMP}");
         }
         
+        if (record.getContent() != null) {
+            sql.VALUES("content", "#{content,jdbcType=LONGVARCHAR}");
+        }
+        
+        return sql.toString();
+    }
+
+    public String selectByExampleWithBLOBs(OrderDOExample example) {
+        SQL sql = new SQL();
+        if (example != null && example.isDistinct()) {
+            sql.SELECT_DISTINCT("id");
+        } else {
+            sql.SELECT("id");
+        }
+        sql.SELECT("order_id");
+        sql.SELECT("user_id");
+        sql.SELECT("order_status");
+        sql.SELECT("pay_amount");
+        sql.SELECT("ctime");
+        sql.SELECT("mtime");
+        sql.SELECT("content");
+        sql.FROM("t_order");
+        applyWhere(sql, example, false);
+        
+        if (example != null && example.getOrderByClause() != null) {
+            sql.ORDER_BY(example.getOrderByClause());
+        }
+        
         return sql.toString();
     }
 

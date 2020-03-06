@@ -15,16 +15,29 @@ public interface OrderDOMapper {
         "insert into t_order (id, order_id, ",
         "user_id, order_status, ",
         "pay_amount, ctime, ",
-        "mtime)",
+        "mtime, content)",
         "values (#{id,jdbcType=BIGINT}, #{orderId,jdbcType=VARCHAR}, ",
         "#{userId,jdbcType=BIGINT}, #{orderStatus,jdbcType=SMALLINT}, ",
         "#{payAmount,jdbcType=BIGINT}, #{ctime,jdbcType=TIMESTAMP}, ",
-        "#{mtime,jdbcType=TIMESTAMP})"
+        "#{mtime,jdbcType=TIMESTAMP}, #{content,jdbcType=LONGVARCHAR})"
     })
     int insert(OrderDO record);
 
     @InsertProvider(type=OrderDOSqlProvider.class, method="insertSelective")
     int insertSelective(OrderDO record);
+
+    @SelectProvider(type=OrderDOSqlProvider.class, method="selectByExampleWithBLOBs")
+    @Results({
+        @Result(column="id", property="id", jdbcType=JdbcType.BIGINT),
+        @Result(column="order_id", property="orderId", jdbcType=JdbcType.VARCHAR),
+        @Result(column="user_id", property="userId", jdbcType=JdbcType.BIGINT),
+        @Result(column="order_status", property="orderStatus", jdbcType=JdbcType.SMALLINT),
+        @Result(column="pay_amount", property="payAmount", jdbcType=JdbcType.BIGINT),
+        @Result(column="ctime", property="ctime", jdbcType=JdbcType.TIMESTAMP),
+        @Result(column="mtime", property="mtime", jdbcType=JdbcType.TIMESTAMP),
+        @Result(column="content", property="content", jdbcType=JdbcType.LONGVARCHAR)
+    })
+    List<OrderDO> selectByExampleWithBLOBs(OrderDOExample example);
 
     @SelectProvider(type=OrderDOSqlProvider.class, method="selectByExample")
     @Results({
