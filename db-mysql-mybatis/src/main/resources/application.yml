@@ -40,7 +40,16 @@ mybatis:
   # mapper 文件存放位置
   mapper-locations: classpath*:mapper/*Mapper.xml
 
+pagehelper:
+  helperDialect: mysql
+
+mybatis-plus:
+  mapper-locations: classpath*:mapper/*Mapper.xml
+  type-aliases-package: com.kk.domain.entity
+
+
 logging:
   level:
     # 日志打印级别，可具体到包、类
     com.kk.domain.mapper: debug
+

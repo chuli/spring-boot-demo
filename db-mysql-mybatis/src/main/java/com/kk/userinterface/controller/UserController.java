@@ -1,5 +1,6 @@
 package com.kk.userinterface.controller;
 
+import com.github.pagehelper.PageHelper;
 import com.kk.domain.entity.User;
 import com.kk.domain.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,6 +54,13 @@ public class UserController {
     // http://localhost:8071/user/getUserList
     @RequestMapping("/getUserList")
     public List getUserList() {
+        return userMapper.getUserList();
+    }
+
+    // http://localhost:8071/user/getUserListPage?pageNum=1&pageSize=2
+    @RequestMapping("/getUserListPage")
+    public List getUserListPage(Integer pageNum, Integer pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
         return userMapper.getUserList();
     }
 }
