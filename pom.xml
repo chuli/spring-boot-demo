@@ -10,12 +10,15 @@
     <version>1.0-SNAPSHOT</version>
     <modules>
         <module>db-mysql-mybatis</module>
+        <module>spring-boot-admin-server</module>
+        <module>spring-boot-admin-client</module>
     </modules>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>1.8</java.version>
         <spring.boot.version>2.1.5.RELEASE</spring.boot.version>
+        <spring.boot.admin.version>2.1.5</spring.boot.admin.version>
         <spring.boot.security.version>2.1.6.RELEASE</spring.boot.security.version>
         <spring.boot.mybatis.version>2.0.1</spring.boot.mybatis.version>
         <spring.boot.druid.version>1.1.18</spring.boot.druid.version>
@@ -41,6 +44,18 @@
                 <version>${spring.boot.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>de.codecentric</groupId>
+                <artifactId>spring-boot-admin-starter-server</artifactId>
+                <version>${spring.boot.admin.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>de.codecentric</groupId>
+                <artifactId>spring-boot-admin-starter-client</artifactId>
+                <version>${spring.boot.admin.version}</version>
             </dependency>
 
             <dependency>

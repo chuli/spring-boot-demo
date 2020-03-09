@@ -1,0 +1,24 @@
+server:
+  port: 8073
+
+spring:
+  application:
+    name: spring-boot-admin-client
+  boot:
+    admin:
+      client:
+        url: http://localhost:8072
+        username: admin
+        password: 123456
+        instance:
+          prefer-ip: true
+          service-url: http://localhost:8073
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: always
