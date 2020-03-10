@@ -12,6 +12,7 @@
         <module>db-mysql-mybatis</module>
         <module>spring-boot-admin-server</module>
         <module>spring-boot-admin-client</module>
+        <module>prometheus-demo</module>
     </modules>
 
     <properties>

@@ -1,0 +1,15 @@
+server:
+  port: 8074
+
+spring:
+  application:
+    name: prometheus-demo
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: always

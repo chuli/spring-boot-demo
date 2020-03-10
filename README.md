@@ -11,6 +11,7 @@
 |db-mysql-mybatis|mybatis操作相关|8071||
 |spring-boot-admin-server|admin-server|8072||
 |spring-boot-admin-client|admin-client|8073||
+|prometheus-demo|prometheus|8074||
 
 
 持久层框架 MyBatis https://mybatis.org/mybatis-3/zh/configuration.html
