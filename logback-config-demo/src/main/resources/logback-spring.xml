@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 日志级别从高到低：OFF、FATAL、ERROR、WARN、INFO、DEBUG、TRACE、ALL -->
+<!-- 日志输出规则：根据当前ROOT级别，日志输出时，级别高于root默认的级别时会输出 -->
+<!-- 以下每个配置的filter是过滤掉输出文件里面高于当前级别的日志，只显示本级别的日志 -->
+<!-- scan 默认为true，当设置为true时，配置文件如果发生改变，将会被重新加载 -->
+<!-- scanPeriod 默认1min，设置检测配置文件是否有修改的时间间隔，如果没有给出时间单位，默认是秒，当scan为true时，此属性生效 -->
+<!-- debug 默认为false，当此属性为true时，将打印logback内部日志信息，实时查看logback运行状态 -->
+<configuration scan="true" scanPeriod="60 seconds" debug="false">
+    <!-- log.dir, log.root.level等这些属性变量均定义在application.yml配置文件中，从application配置文件中读取变量需使用springProperty标签 -->
+    <springProperty name="LOG_DIR" source="log.dir" scope="context"/>
+    <springProperty name="APP_NAME" source="spring.application.name" scope="context"/>
+    <springProperty name="ROOT_LEVEL" source="log.root.level" scope="context"/>
+    <springProperty name="ROOT_APPENDER_FILTER_LEVEL" source="log.appender.root.filter.level" scope="context"/>
+    <springProperty name="PROFILE" source="profile" scope="context" />
+
+    <!-- 定义日志格式 -->
+    <property name="LOG_PATTERN"
+              value="[%d{&quot;yyyy-MM-dd'T'HH:mm:ss,SSSXXX&quot;}][${PROFILE}][%level][%thread] %logger{20} - %m%n"/>
+    <!-- 定义日志文件输出位置 -->
+    <property name="LOG_FILE" value="${LOG_DIR}"/>
+    <!-- 定义日志最大的保留天数 -->
+    <property name="MAX_HISTORY" value="7"/>
+
+    <!-- 滚动记录文件，先将日志记录到指定文件，当符合某个条件时，将日志记录到其他文件 RollingFileAppender -->
+    <appender name="rootAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file></file>
+        <!-- 过滤器，只记录该level的日志 -->
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>${ROOT_APPENDER_FILTER_LEVEL}</level>
+        </filter>
+        <encoder charset="UTF-8"
+                 class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+            <providers>
+                <mdc />
+                <timestamp>
+                    <timeZone>UTC</timeZone>
+                </timestamp>
+                <pattern>
+                    <pattern>
+                        {
+                        "level": "%level",
+                        "trace": "%X{X-B3-TraceId:-}",
+                        "span": "%X{X-B3-SpanId:-}",
+                        "parent": "%X{X-B3-ParentSpanId:-}",
+                        "thread": "%thread",
+                        "class": "%logger{40}",
+                        "message": "%message%exception{40}"
+                        }
+                    </pattern>
+                </pattern>
+            </providers>
+        </encoder>
+        <!-- 最常用的滚动策略，根据时间来指定策略 -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_FILE}%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>${MAX_HISTORY}</maxHistory>
+        </rollingPolicy>
+
+    </appender>
+
+    <appender name="asyncRootAppender" class="ch.qos.logback.classic.AsyncAppender">
+        <appender-ref ref="rootAppender" />
+        <queueSize>1024</queueSize>
+        <neverBlock>true</neverBlock>
+    </appender>
+
+    <!-- 控制台输出 -->
+    <appender name="stdoutAppender" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>${LOG_PATTERN}</pattern>
+        </encoder>
+    </appender>
+
+    <root>
+        <level value="${ROOT_LEVEL}"/>
+        <appender-ref ref="asyncRootAppender"/>
+        <appender-ref ref="stdoutAppender"/>
+    </root>
+
+</configuration>

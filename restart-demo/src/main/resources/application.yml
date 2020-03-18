@@ -1,0 +1,21 @@
+server:
+  port: 8077
+
+management:
+  endpoint:
+    health:
+      show-details: always
+    shutdown:
+      # 启用shutdown配置
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+      # 自定义管理断点的前缀，安全性考虑
+      base-path: /restartactuator
+  server:
+    # 自定义端口
+    port: 12581
+    # 不允许远程管理连接，安全性考虑
+    address: 127.0.0.1

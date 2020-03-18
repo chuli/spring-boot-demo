@@ -1,0 +1,20 @@
+server:
+  port: 8075
+
+profile: local
+
+spring:
+  application:
+    name: logback-config-demo
+
+logging:
+  config: classpath:logback-spring.xml
+
+log:
+  root:
+    level: INFO
+  appender:
+    root:
+      filter:
+        level: INFO
+  dir: /tmp/logdata/machine/runtime/json_logback_demo/

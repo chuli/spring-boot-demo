@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.kk</groupId>
+    <groupId>com.kk.kk</groupId>
     <artifactId>spring-boot-demo</artifactId>
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
@@ -13,6 +13,10 @@
         <module>spring-boot-admin-server</module>
         <module>spring-boot-admin-client</module>
         <module>prometheus-demo</module>
+        <module>logback-config-demo</module>
+        <module>rabbitmq-demo</module>
+        <module>restart-demo</module>
+        <module>redis-session</module>
     </modules>
 
     <properties>
@@ -28,6 +32,10 @@
         <baomidou.mybatisplus.version>3.3.0</baomidou.mybatisplus.version>
         <slf4j.version>1.7.26</slf4j.version>
         <log4j.version>2.12.0</log4j.version>
+        <logback.version>1.1.7</logback.version>
+        <logback.ext.spring.version>0.1.4</logback.ext.spring.version>
+        <logback.ncoder.version>4.7</logback.ncoder.version>
+        <spring.session.redis.version>2.2.2.RELEASE</spring.session.redis.version>
     </properties>
 
     <parent>
@@ -89,6 +97,32 @@
                 <groupId>com.baomidou</groupId>
                 <artifactId>mybatis-plus-boot-starter</artifactId>
                 <version>${baomidou.mybatisplus.version}</version>
+            </dependency>
+
+            <!-- log -->
+            <dependency>
+                <groupId>ch.qos.logback</groupId>
+                <artifactId>logback-classic</artifactId>
+                <version>${logback.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>net.logstash.logback</groupId>
+                <artifactId>logstash-logback-encoder</artifactId>
+                <version>${logback.ncoder.version}</version>
+            </dependency>
+
+            <!-- rabbitmq -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-amqp</artifactId>
+                <version>${spring.boot.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.session</groupId>
+                <artifactId>spring-session-data-redis</artifactId>
+                <version>2.1.6.RELEASE</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

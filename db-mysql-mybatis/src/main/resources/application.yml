@@ -37,14 +37,6 @@ spring:
       client:
         url: http://localhost:8072
 
-mybatis:
-  # MyBatis 配置是否开启
-  check-config-location: true
-  # MyBatis配置文件位置，与check-config-location配合使用
-  config-location: classpath:mybatis/mybatis-config.xml
-  # mapper 文件存放位置
-  mapper-locations: classpath*:mapper/*Mapper.xml
-
 pagehelper:
   helperDialect: mysql
 

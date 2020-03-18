@@ -1,0 +1,22 @@
+server:
+  port: 8078
+
+spring:
+  application:
+    name: redis-session
+
+  cache:
+    type: redis
+  # redis 配置
+  redis:
+    # 服务器地址
+    host: 127.0.0.1
+    # 服务器端口
+    port: 6379
+    # 服务器连接密码（默认为空）
+    password:
+    # Redis分片（默认有16个分片，默认为0），在大型项目中建议使用0号分片存储，select分片耗时较大
+    database: 0
+    # 连接超时时间
+    timeout: 1000ms
+

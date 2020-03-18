@@ -12,6 +12,10 @@
 |spring-boot-admin-server|admin-server|8072||
 |spring-boot-admin-client|admin-client|8073||
 |prometheus-demo|prometheus|8074||
+|logback-demo|log|8075||
+|rabbitmq-demo|rabbitmq|8076||
+|restart-demo|优雅重启|8077||
+|restart-session|集成Redis并实现分布式Session|8078||
 
 
 持久层框架 MyBatis https://mybatis.org/mybatis-3/zh/configuration.html
