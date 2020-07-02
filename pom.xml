@@ -28,7 +28,7 @@
         <spring.boot.mybatis.version>2.0.1</spring.boot.mybatis.version>
         <spring.boot.druid.version>1.1.18</spring.boot.druid.version>
         <spring.boot.pagehelper.version>1.2.10</spring.boot.pagehelper.version>
-        <mysql.connect.version>6.0.6</mysql.connect.version>
+        <mysql.connect.version>8.0.16</mysql.connect.version>
         <baomidou.mybatisplus.version>3.3.0</baomidou.mybatisplus.version>
         <slf4j.version>1.7.26</slf4j.version>
         <log4j.version>2.12.0</log4j.version>
