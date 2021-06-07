@@ -32,7 +32,7 @@
         <baomidou.mybatisplus.version>3.3.0</baomidou.mybatisplus.version>
         <slf4j.version>1.7.26</slf4j.version>
         <log4j.version>2.12.0</log4j.version>
-        <logback.version>1.1.7</logback.version>
+        <logback.version>1.2.0</logback.version>
         <logback.ext.spring.version>0.1.4</logback.ext.spring.version>
         <logback.ncoder.version>4.7</logback.ncoder.version>
         <spring.session.redis.version>2.2.2.RELEASE</spring.session.redis.version>
